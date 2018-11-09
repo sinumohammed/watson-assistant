@@ -1,0 +1,105 @@
+<html>
+<head>
+  <base href="/">
+  <title>Watson Assistant Chat App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:image" content="conversation.svg" />
+  <meta property="og:title" content="Conversation Chat Simple" />
+  <meta property="og:description" content="Sample application that shows how to use the Watson Assistant API to identify user intents"
+  />
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.2.custom.css" type="text/css" media="screen" />
+  <link type="text/css" href="css/jquery.ui.chatbox.css" rel="stylesheet" />
+  <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script>
+  <script type="text/javascript" src="js/jquery.ui.chatbox.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          var box = null;
+		  var x = document.getElementById("myDIV");
+          x.style.display = "none";
+		  
+		  $("input[type='button']").click(function(event, ui) {
+              if(box) {
+			      
+                  box.chatbox("option","boxManager").toggleBox();
+				  document.getElementById('btnId').value = 'Lets Talk!';
+				  location.reload();
+				//   x.style.display = "block"; -->
+              }
+              else {
+                  // box = $("#chat_div").chatbox({id:"chat_div",  -->
+                                                // user:{key : "value"}, -->
+                                                // title : "test chat", -->
+                                                // messageSent : function(id, user, msg) { -->
+                                                    // $("#log").append(id + " said: " + msg + "<br/>"); -->
+                                                    // $("#chat_div").chatbox("option", "boxManager").addMsg(id, msg); -->
+													// $("#chat_div").chatbox("option", "boxManager"); -->
+													
+                                                // } -->
+												
+												// }); -->
+		          // location.reload(true); -->
+				  document.getElementById('btnId').value = 'Close Chat!';
+				  box = $("#myDIV").chatbox({title : "RP Bot",});	
+				  x.style.display = "block";
+				  
+				  
+				  				  
+												
+              }
+          });
+      });
+    </script>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="bg2"></div>
+ 	
+  <div id="contentParent" class="responsive-columns-wrapper">
+    <div id="chat-column-holder" class="responsive-column content-column">
+    <!-- <div id="chat-column-holder" class="responsive-column content-column" style="background:black url(../img/chatbg.jpg) center no-repeat;"> -->
+     
+	<input id = "btnId"  type="button" name="toggle" value="Lets Talk!" class="lets-talk"/>
+      <div class="chat-column" style="height:fit-content"    >            
+	   <div id="myDIV" style ="height:360px;">
+      <div id="scrollingChat"></div>
+        <label for="textInput" class="inputOutline">
+          <input id="textInput" class="input responsive-column" placeholder="Type something" type="text" onkeydown="ConversationPanel.inputKeyDown(event, this)" autofocus>
+        </label>
+		</div>
+		
+        <!-- <div class="disclaimer">
+          * This system is for demonstration purposes only and is not intended to process Personal Data. No Personal Data is to be entered
+          into this system as it may not have the necessary controls in place to meet the requirements of the General Data Protection
+          Regulation (EU) 2016/679.
+        </div> -->
+      </div>
+	 <!--  </div> -->
+	 
+    </div>
+    <div id="payload-column" class="fixed-column content-column" style="display:none" >
+      <div id="payload-initial-message">
+        Type something to see the output
+      </div>
+      <div id="payload-request" class="payload"></div>
+      <div id="payload-response" class="payload"></div>
+    </div>
+  </div>
+  <footer>© 2018 - FCA</footer>
+
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/conversation.js"></script>
+  <script src="js/payload.js"></script>
+  <script src="js/global.js"></script>
+  <script src="js/watson-speech.js"></script>
+  <!-- window.fetch pollyfill for IE/Edge & Older Chrome/FireFox -->
+  <script src="js/fetch.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/watson-developer-cloud/watson-developer-cloud.github.io/master/analytics.js"></script>
+
+</body>
+</html>
