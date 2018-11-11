@@ -166,7 +166,7 @@ var ConversationPanel = (function () {
     if (newPayload.hasOwnProperty('output')) {
       if (newPayload.output.hasOwnProperty('generic')) {
         var options = null;
-        var title='';
+        var title = '';
         var preference = 'text';
 
         for (var i = 0; i < newPayload.output.generic.length; i++) {
@@ -182,8 +182,8 @@ var ConversationPanel = (function () {
           }
         }
         if (options !== null) {
-          if(title){
-              textArray.push(title);
+          if (title && (textArray.indexOf(title) < 0)) {
+            textArray.push(title);
           }
           if (preference === 'text') {
             outMsg += '<ul>';
