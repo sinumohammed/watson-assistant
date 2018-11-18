@@ -18,6 +18,7 @@
         options: {
             id: null, //id for the DOM element
             title: null, // title of the chatbox
+            position:'relative',
             user: null, // can be anything associated with this chatbox
             hidden: false,
             offset: 10, // relative to right edge of the browser window
@@ -27,6 +28,7 @@
                 this.boxManager.addMsg(user.first_name, msg);
             },
             boxClosed: function(id) {
+                document.getElementById('btnId').style.display="block";
             }, // called when the close icon is clicked
             boxManager: {
                 // thanks to the widget factory facility

@@ -137,6 +137,45 @@ var ConversationPanel = (function () {
         // Class to start fade in animation
         currentDiv.classList.add('load');
       });
+
+      // initial load advanced options
+      var htmlString = '';
+      var UI = null;
+      var initialLoadCount=0;
+
+      if (newPayload.output && newPayload.output.UI) {
+        var UI = newPayload.output.UI;
+        var startString = '<div class="flex-box">';
+        var optionsStr=startString,welcomeStr=startString;
+        for (i = 0; i < UI.options.length; i++) {
+          if (UI.options[i].query && UI.options[i].query != "") {
+            var _src = (UI.options[i].img && UI.options[i].img != "") ? UI.options[i].img : "../img/no-image.png"
+            var _title = (UI.options[i].title != "") ? UI.options[i].title : UI.options[i].query;
+            var _query = UI.options[i].query;
+            var tmpStr = '<div class="option-outer" title="'+_query+'" onclick="optionSelected(event)" data-query="' + _query + '">';
+            if(UI.options[i].showImage==undefined || UI.options[i].showImage)
+              tmpStr += '<img src=' + _src + ' alt="The image that you provided not exist or correpted, please check it again">';
+            tmpStr += '<span class="title">' + _title + '</span></div>';
+            if(UI.options[i].initialLoad){              
+              welcomeStr+=tmpStr;
+              optionsStr+=tmpStr;
+              ++initialLoadCount;
+            }
+            else{
+              optionsStr+=tmpStr;
+            }
+          }
+        }         
+        var endString = '<div class="prevent"></div></div>';
+        optionsStr+=endString;
+        document.getElementById('overlay-faq').insertAdjacentHTML('beforeend', optionsStr);
+        if (initialLoadCount>0) {
+          welcomeStr+=endString;
+          document.getElementById('scrollingChat').insertAdjacentHTML('beforeend', welcomeStr);
+        }
+        $('.menu-button').show(500);
+      }
+
       // Move chat to the most recent messages when new messages are added
       scrollToChatBottom();
     }
@@ -249,6 +288,11 @@ var ConversationPanel = (function () {
   //   This is done so that the "context" of the conversation is maintained in the view,
   //   even if the Watson message is long.
   function scrollToChatBottom() {
+    var x = document.querySelector(".loader-bg");
+    if (x)
+      x.style.display = "none";
+    //$('.loader-bg').hide(500);
+
     var scrollingChat = document.querySelector('#scrollingChat');
 
     // Scroll to the latest message sent by the user

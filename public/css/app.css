@@ -123,7 +123,7 @@ div {
 #scrollingChat {
   overflow-y: auto;
   overflow-x: hidden;
-  height: calc(100% - 2.5rem);
+  height: calc(100% - 2.55rem);
   padding-right: 2px;
 }
 
@@ -214,6 +214,14 @@ div {
   line-height: 1.3125rem;
 }
 
+.from-watson .message-inner a{
+  color: #b5b5c6;
+}
+
+.from-watson.latest .message-inner a{
+  color: #9855d4;
+}
+
 .message-inner ul{
   margin: 0;  
 }
@@ -292,6 +300,10 @@ input:-moz-placeholder {
   border-bottom: 0.0625rem solid #aeaeae;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+
+  /* width:calc(100% - 60px);
+  float: left; */
+  flex-grow: 100;
 }
 
 #textInputDummy {
@@ -509,27 +521,171 @@ html{
     height: 0;
 }
 
-#scrollingChat::-webkit-scrollbar {
+#overlay-faq::-webkit-scrollbar, #scrollingChat::-webkit-scrollbar {
 	width: 10px;
   background-color: #F5F5F5;
 }
-#scrollingChat::-webkit-scrollbar-track {
+#overlay-faq::-webkit-scrollbar-track,#scrollingChat::-webkit-scrollbar-track {
   border-radius: 10px;
   background: rgba(0,0,0,0.1);
   border: 1px solid #ccc;
   
 }
 
-#scrollingChat::-webkit-scrollbar-thumb {
+#overlay-faq::-webkit-scrollbar-thumb,#scrollingChat::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: linear-gradient(left, #fff, #e4e4e4);
   border: 1px solid #aaa;
 }
 
-#scrollingChat::-webkit-scrollbar-thumb:hover {
+#overlay-faq::-webkit-scrollbar-thumb:hover,#scrollingChat::-webkit-scrollbar-thumb:hover {
   background: #fff;
 }
 
-#scrollingChat::-webkit-scrollbar-thumb:active {
+#overlay-faq::-webkit-scrollbar-thumb:active,#scrollingChat::-webkit-scrollbar-thumb:active {
   background: linear-gradient(left, #22ADD4, #1E98BA);
 }
+.overlay-faq{
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: hidden auto;
+  height: calc(100% - 2.55rem);
+  background-color: #FFF;
+  top: 0;
+  z-index: 2;
+  color: #fff;  
+}
+.flex-box{
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  justify-content: space-between;
+  padding: 20px 20px 0 20px;
+}
+#scrollingChat .flex-box{  
+  position: relative;
+}
+#scrollingChat .flex-box .option-outer{
+  background: #FFF;
+  width: 46%;
+  margin: 0 0px 25px 0px;
+}
+.disable-click .prevent{
+  position: absolute;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.user-actions{
+  display: flex;
+  border-top: 1px solid #b6dee8;
+}
+.menu-button{
+  float: left;
+  box-shadow: #226dbc -1px 1px 6px 0px;
+  background: #226dbc;
+  padding-top: 6px;
+  border-radius: 40px;
+  height: 32px;
+  margin: 4px 0 0 5px;
+  width: 32px;
+  text-align: center;
+  cursor: pointer;
+  flex-grow: 1;
+  display: none;
+}
+svg{
+  display: none;
+}
+.close{
+  display: inline;
+  color: #FFF;
+}
+.menu-button.closed > svg{
+  display: inline;
+}
+.menu-button.clsosed{
+  padding-top: 5px;
+}
+.menu-button.closed > b{
+  display: none;
+}
+.option-outer{
+  width: 47%;
+    font-size: 11px;
+    text-align: center;
+    line-height: 13px;
+    color: #a58a8f;
+    float: left;
+    margin: 0 0px 20px 0px;
+    /* border: 1px solid #226dbc; */
+    padding: 8px 4px;
+    cursor: pointer;
+    box-shadow: #2a5f98 -4px 4px 10px 1px;
+}
+.disable-click .option-outer{
+  box-shadow: #868282 -4px 4px 10px 1px;
+}
+.option-outer:hover {
+  color: #226dbc;
+  box-shadow: #2a5f98 -3px 3px 20px 3px;
+}
+.option-outer img{
+  max-width: 100%;
+  padding-bottom:0.5em;
+}
+.option-outer .title{
+  display: block;
+  word-break: break-all;
+}
+.loader-bg{
+  background: #347fc3;
+  width: 100%;
+  height: 100%;
+}
+#loader{  
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+#loader .bar {
+  position: relative;
+  height: 2px;
+  width: 225px;
+  margin: 0 10%;
+  background: #fff;
+  margin-top: 150px;
+}
+
+#loader .circle {
+  position: absolute;
+  top: -30px;
+  margin-left: -30px;
+  height: 40px;
+  width: 40px;
+  left: 0;
+  background: #fff;
+  border-radius: 30%;
+  -webkit-animation: move 5s infinite;
+}
+
+#loader p {
+  position: absolute;
+  top: -30px;
+  right: -50px;
+  text-transform: uppercase;
+  color: #347fc3;
+  font-family: helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+@-webkit-keyframes move {
+  0% {left: 0;}
+  50% {left: 100%; -webkit-transform: rotate(450deg); width: 100px; height: 100px;}
+  75% {left: 100%; -webkit-transform: rotate(450deg); width: 100px; height: 100px;}
+  100% {right: 75%;}
+} 
